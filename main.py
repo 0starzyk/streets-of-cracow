@@ -20,7 +20,7 @@ if __name__ == '__main__':
             soup = BeautifulSoup(source.content, 'html.parser')
             table = soup.find_all('tr', class_='_data')
             for row in table:
-                text_row = list(filter(lambda x: '\n' not in x, map(lambda x: x.text, row)))
+                text_row = list(filter(lambda x: '\n' not in x, map(lambda x: x.text.replace("'", "''"), row)))
                 postal_code = text_row[0]
                 district = text_row[2]
                 street = text_row[3]
@@ -29,6 +29,7 @@ if __name__ == '__main__':
 
         stop = time()
         print(f'Execution time: {stop - start}')
+        connection.commit()
         connection.close()
     except OperationalError:
         print('Error')

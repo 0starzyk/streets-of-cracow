@@ -18,4 +18,3 @@ def add_street(connection, *values):
     cursor = connection.cursor()
     cursor.execute(f"INSERT INTO streets(postal_code, district, street, numbers) VALUES('{values[0]}', '{values[1]}', \
     '{values[2]}', '{values[3]}')")
-    connection.commit()
